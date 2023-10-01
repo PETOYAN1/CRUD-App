@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import { addUser } from '../../reducer/UserReducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router';
 import { updateUser } from '../../reducer/UserReducer';
-const style = {
-  'background' : 'linear-gradient(285deg, rgb(120 166 203), rgb(45 40 123))'
-}
+import { useCallback } from 'react';
 
 function Update() {
     const { id } = useParams();
@@ -33,15 +30,20 @@ function Update() {
       }));
       navigate('/home');
     }
+    const LoginInput = useCallback((initElement) => {
+      if (initElement) {
+        initElement.focus();
+      }
+    }, []);
 
   return (
-    <div style={style} className='d-flex w-100 vh-100 justify-content-center align-items-center'>
+    <div className='create d-flex w-100 vh-100 justify-content-center align-items-center'>
         <div className='create-div w-50 text-white p-5'>
           <h3>Update User</h3>
           <form onSubmit={handleUpdate}>
             <div>
               <label>name:</label>
-              <input onChange={(e) => setName(e.target.value)} defaultValue={uname} placeholder='Enter name' className='form-control' type="text" name="name"/> 
+              <input ref={LoginInput} onChange={(e) => setName(e.target.value)} defaultValue={uname} placeholder='Enter name' className='form-control' type="text" name="name"/> 
             </div>
             <div>
               <label>position:</label>

@@ -6,8 +6,15 @@
     align-items: center;
 }
 .login {
-    background: linear-gradient(260deg, #00ffe7, #0d6efd);
+    background: $linear-gradient;
+    form {
+        .btn {
+            background: $linear-gradient;
+            border: none;
+        }
+    }
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -84,10 +91,10 @@ h1 {
         margin-left: 5px;
     }
     .login-err {
-        top: 41.7%;
+        top: 45.7%;
     }
     .pass-err {
-        top: 50%;
+        top: 53.5%;
     }
     .login-err-up {
         top: 37.1%;
@@ -140,4 +147,14 @@ h1 {
 .create-div {
     border: 1px solid;
     box-shadow: 5px 5px 9px white;
+}
+.create {
+    background: $other-gradient;
+}
+.btn-info {
+    background: #00000085;
+    border: none;
+}
+.btn-info:hover {
+    background-color: black;
 }

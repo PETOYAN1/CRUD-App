@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+
 
 export function Login() {
 
@@ -17,7 +19,7 @@ export function Login() {
                 if (res.data === "Success") {
                     navigate('/user');
                 } else {
-                    alert("No record existed");
+                    alert("Wrong Login or Password ");
                 }
             })
             .catch((err) => console.log(err)); 
@@ -25,11 +27,12 @@ export function Login() {
         reset({
             Password : ''
         })
+
     }
     return (
       <div className='login template d-flex justify-content-center align-items-center w-100 vh-100 bg-primary'>
         <div className='40-w p-5 rounded bg-white'>
-            <h3>Sign In</h3>
+            <h3 >Sign In</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 
                 <div className='mb-2'>

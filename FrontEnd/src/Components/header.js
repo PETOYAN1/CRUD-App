@@ -12,8 +12,8 @@ export const Header = () => {
         <div className="sidebar">
             <h1 onClick={() => navigate('/')}>Sales.</h1>
             <div className="dashboard" style={style}>
+                <Link to={'/user'}>Admin Page</Link>
                 <Link to={'/home'}>Home Page</Link>
-                <Link to={'/user'}>User Page</Link>
             </div>
         </div>
     )
