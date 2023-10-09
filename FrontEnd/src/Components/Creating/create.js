@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { addUser } from '../../reducer/UserReducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useNavigate } from 'react-router';
-import { useEffect } from 'react';
 import { useRef } from 'react';
 
 function Create() {
@@ -17,9 +16,13 @@ function Create() {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        dispatch(addUser({id : users[users.length - 1].id + 1, name : name, position : position, office : office , age : age}));
-        navigate('/home');
+      event.preventDefault();
+        if (!name.length || !position.length || !office.length || !age.length ) {
+          alert('Write All inputs');
+        } else {
+          dispatch(addUser({id : users.length + 1, name : name, position : position, office : office , age : age}));
+          navigate('/home');
+        }
     }
 
       const LoginInput = useCallback((initElement) => {
@@ -42,19 +45,23 @@ function Create() {
           <form onSubmit={handleSubmit}>
             <div>
               <label>name:</label>
-              <input ref={LoginInput} onChange={(e) => setName(e.target.value)} placeholder='Enter name' className='form-control' type="text" name="name"/> 
+              <input ref={LoginInput} onChange={(e) => setName(e.target.value)} placeholder='Enter name' className='form-control' type="text" name="name"/>
+              {!name.length ? <span className='text-danger'>Write Name</span> : null} 
             </div>
             <div>
               <label>position:</label>
               <input ref={emailInput} onChange={(e) => setPosition(e.target.value)} placeholder='Enter position' className='form-control' type="text" name="position"/> 
+              {!position.length ? <span className='text-danger'>Write position</span> : null} 
             </div>
             <div>
               <label>office:</label>
               <input onChange={(e) => setOffice(e.target.value)} placeholder='Enter office' className='form-control' type="text" name="office"/> 
+              {!office.length ? <span className='text-danger'>Write office</span> : null}
             </div>
             <div>
                <label>age:</label>
                <input onChange={(e) => setAge(e.target.value)} placeholder='Enter age' className='form-control' type="number" name="age"/>
+               {!age.length ? <span className='text-danger'>Write age</span> : null}
             </div>
                   <input className='btn btn-info mt-3 text-white' type="submit" value="Create"/>
               </form>

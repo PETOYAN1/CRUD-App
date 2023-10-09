@@ -21,14 +21,19 @@ function Update() {
 
     const handleUpdate = (event) => {
       event.preventDefault();
-      dispatch(updateUser({
-        id : id,
-        name : uname,
-        position : uPosition,
-        office : uOffice,
-        age : uAge
-      }));
-      navigate('/home');
+      console.log()
+      if (!uname.length  || !uPosition.length || !uOffice.length || !uAge.length) {
+        alert('Please write all inputs');
+      } else {
+        dispatch(updateUser({
+          id : id,
+          name : uname,
+          position : uPosition,
+          office : uOffice,
+          age : uAge
+        }));
+        navigate('/home');
+      }
     }
     const LoginInput = useCallback((initElement) => {
       if (initElement) {
@@ -44,18 +49,22 @@ function Update() {
             <div>
               <label>name:</label>
               <input ref={LoginInput} onChange={(e) => setName(e.target.value)} defaultValue={uname} placeholder='Enter name' className='form-control' type="text" name="name"/> 
+              {!uname.length ? <span className='text-danger'>Write name</span> : null} 
             </div>
             <div>
               <label>position:</label>
               <input onChange={(e) => setPosition(e.target.value)} defaultValue={uPosition} placeholder='Enter position' className='form-control' type="text" name="position"/> 
+              {!uPosition.length ? <span className='text-danger'>Write position</span> : null} 
             </div>
             <div>
               <label>office:</label>
               <input onChange={(e) => setOffice(e.target.value)} defaultValue={uOffice} placeholder='Enter office' className='form-control' type="text" name="office"/> 
+              {!uOffice.length ? <span className='text-danger'>Write office</span> : null}
             </div>
             <div>
                <label>age:</label>
                <input onChange={(e) => setAge(e.target.value)} defaultValue={uAge} placeholder='Enter age' className='form-control' type="number" name="age"/>
+               {!uAge.length ? <span className='text-danger'>Write age</span> : null}
             </div>
                   <input className='btn btn-info mt-3 text-white' type="submit" value="Update"/>
               </form>
